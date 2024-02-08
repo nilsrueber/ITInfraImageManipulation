@@ -3,13 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My Website</title>
+        <title>Benchmarks</title>
+        <script type="text/javascript" src="main.js"></script>
     </head>
     <body>
-        <h1>Welcome to My Website</h1>
-
-        <p>This is a basic boilerplate for a website.</p>
-        <button onclick="sieveOfEratosthenes(100)">Click me</button>
-        <script src="testing.js"></script>
+        <h1>Sieve of Eratosthenes</h1>
+        <button onclick="sieveCallerWASM()">Run Rust WASM Sieve</button>
+        <button onclick="sieveCallerJS()">Run JavaScript Sieve</button>
     </body>
 </html>
