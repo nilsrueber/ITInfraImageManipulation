@@ -1,20 +1,23 @@
 use wasm_bindgen::prelude::*;
 
+
 // Exporting the function to JavaScript
 #[wasm_bindgen]
-pub fn rust_wasm_sieve(limit: u32) -> Vec<u32> {
-    let mut sieve = vec![true; (limit + 1) as usize];
-    let mut primes = Vec::new();
-
-    for i in 2..=(limit as f64).sqrt() as u32 {
-        if sieve[i as usize] {
-            primes.push(i);
-            for j in (i * i..=limit).step_by(i as usize) {
-                sieve[j as usize] = false;
+pub fn wasm_sieve(limit: usize) -> Vec<usize> {
+    // Create a boolean vector to track whether each number is prime
+    let mut is_prime: Vec<bool> = vec![true; limit + 1];
+    // 0 and 1 are not prime numbers
+    is_prime[0] = false;
+    is_prime[1] = false;
+    // Iterate through the numbers starting from 2
+    for i in 2..=(limit as f64).sqrt() as usize {
+        if is_prime[i] {
+            // Mark multiples of the current prime number as not prime
+            for j in (i * i..=limit).step_by(i) {
+                is_prime[j] = false;
             }
         }
     }
-
-    primes.extend((sieve.len() as u32 - 1).saturating_sub(limit)..(sieve.len() as u32));
+    let primes: Vec<usize> = (2..=limit).filter(|&i| is_prime[i]).collect();
     primes
 }
